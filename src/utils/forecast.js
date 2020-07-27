@@ -13,9 +13,10 @@ const forecast = (lat,long,callback) => {
         } else if (response.body.error) {
             callback('Please check your coordinates. Unable to find weather forecast for your location. Please try again.',undefined)
         } else {
-            callback(undefined, 'The temperature is currently ' + response.body.current.temperature + 
-            ' degrees Fahrenheit. It feels like ' + response.body.current.feelslike + 
-            ' degrees Fahrenheit. There is a ' + response.body.current.precip + '% chance of rain.')
+            const current = response.body.current
+            callback(undefined, current.weather_descriptions[0]+'. The temperature is currently ' + response.body.current.temperature + 
+            ' degrees Fahrenheit. It feels like ' + current.feelslike + 
+            ' degrees Fahrenheit. There is a ' + current.precip + '% chance of rain. The humidity is '+ current.humidity + '.')
             //callback(undefined,response.body.temperature)
         }
     })
